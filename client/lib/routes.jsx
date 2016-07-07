@@ -20,4 +20,4 @@ FlowRouter.route('/me', {
       content: (<Me />)
     })
   }
-})
+});
