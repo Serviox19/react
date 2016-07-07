@@ -1,8 +1,13 @@
 import React from 'react';
+import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
-Notes = new Meteor.Collection("notes");
+Notes = new Mongo.Collection("notes");
 
-export default class App extends React.Component {
+export default class App extends TrackerReact(React.Component) {
+
+  notes() {
+    return Notes.find({}).fetch();
+  }
 
   addNote(event) {
     event.preventDefault();
@@ -19,12 +24,20 @@ export default class App extends React.Component {
   }
 
   render() {
+    let getNotes = this.notes();
+    if (getNotes.length < 1) {
+      return (<div>Loading....</div>)
+    }
+    // console.log(this.notes());
     return (
       <div>
         <h1>My Notes</h1>
         <form className="new-note" onSubmit={this.addNote.bind(this)}>
           <input type="text" ref="note" placeholder="Enter new Note!" />
         </form>
+        <div>
+          {getNotes[0].text}
+        </div>
       </div>
     )
   }
