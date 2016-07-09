@@ -1,26 +1,15 @@
 import React from 'react';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
+import NotesForm from '../components/NotesForm.jsx';
+import NotesSingle from '../components/NotesSingle.jsx';
+
 Notes = new Mongo.Collection("notes");
 
 export default class App extends TrackerReact(React.Component) {
 
   notes() {
     return Notes.find({}).fetch();
-  }
-
-  addNote(event) {
-    event.preventDefault();
-    var text = this.refs.note.value.trim();
-
-    Notes.insert({
-      text: text,
-      complete: false,
-      createdAt: new Date()
-    });
-
-    console.log(text);
-    this.refs.note.value = '';
   }
 
   render() {
@@ -32,12 +21,11 @@ export default class App extends TrackerReact(React.Component) {
     return (
       <div>
         <h1>My Notes</h1>
-        <form className="new-note" onSubmit={this.addNote.bind(this)}>
-          <input type="text" ref="note" placeholder="Enter new Note!" />
-        </form>
-        <div>
-          {getNotes[0].text}
-        </div>
+        <NotesForm />
+        <ul>
+          <NotesSingle notes={getNotes[0]} />
+          <NotesSingle notes={getNotes[1]} />
+        </ul>
       </div>
     )
   }
