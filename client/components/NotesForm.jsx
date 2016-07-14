@@ -6,14 +6,10 @@ export default class NotesForm extends Component {
     event.preventDefault();
     var text = this.refs.note.value.trim();
 
-    Notes.insert({
-      text: text,
-      complete: false,
-      createdAt: new Date()
+    Meteor.call('addNote', text, ()=> {
+      // console.log(text);
+      this.refs.note.value = '';
     });
-
-    // console.log(text);
-    this.refs.note.value = '';
   }
 
   render() {
