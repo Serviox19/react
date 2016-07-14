@@ -6,7 +6,7 @@ import NotesSingle from '../components/NotesSingle.jsx';
 
 Notes = new Mongo.Collection("notes");
 
-export default class App extends TrackerReact(React.Component) {
+export default class Home extends TrackerReact(React.Component) {
 
   notes() {
     return Notes.find({}).fetch();
@@ -22,9 +22,10 @@ export default class App extends TrackerReact(React.Component) {
       <div>
         <h1>My Notes</h1>
         <NotesForm />
-        <ul>
-          <NotesSingle notes={getNotes[0]} />
-          <NotesSingle notes={getNotes[1]} />
+        <ul className="notes">
+          {this.notes().map( (notes)=>{
+            return <NotesSingle key={notes._id} notes={notes} />
+          })}
         </ul>
       </div>
     )

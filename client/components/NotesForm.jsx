@@ -12,7 +12,7 @@ export default class NotesForm extends Component {
       createdAt: new Date()
     });
 
-    console.log(text);
+    // console.log(text);
     this.refs.note.value = '';
   }
 
