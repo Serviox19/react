@@ -6,6 +6,16 @@ Meteor.methods({
       complete: false,
       createdAt: new Date()
     });
+  },
+  toggleNote(id, status) {
+    Notes.update(id, {
+      $set:{complete: !status}
+    })
+  },
+  deleteNote(id) {
+    Notes.remove(id), {
+      
+    }
   }
-  
+
 });
