@@ -3,6 +3,7 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
 import NotesForm from '../components/NotesForm.jsx';
 import NotesSingle from '../components/NotesSingle.jsx';
+import Navbar from '../components/Navbar.jsx';
 
 Notes = new Mongo.Collection("notes");
 
@@ -35,6 +36,7 @@ export default class Home extends TrackerReact(React.Component) {
     // console.log(this.notes());
     return (
       <div>
+        <Navbar />
         <h1>My Notes</h1>
         <NotesForm />
         <ul className="notes">

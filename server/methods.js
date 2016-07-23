@@ -10,12 +10,10 @@ Meteor.methods({
   toggleNote(id, status) {
     Notes.update(id, {
       $set:{complete: !status}
-    })
+    });
   },
   deleteNote(id) {
-    Notes.remove(id), {
-      
-    }
+    Notes.remove(id);
   }
 
 });
